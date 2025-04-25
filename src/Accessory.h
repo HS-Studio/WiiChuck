@@ -2,6 +2,7 @@
 #define Accessory_h
 
 #include "Arduino.h"
+#include <Wire.h>
 
 //
 
@@ -60,7 +61,7 @@ class Accessory: public Classic,
 		public Drums,
 		public Guitar {
 public:
-	Accessory();
+	Accessory(TwoWire &wire = Wire);
 	void reset();
 	ControllerType type;
 
@@ -240,6 +241,7 @@ private:
 	static void sendMultiSwitch(uint8_t iic, uint8_t sw);
 
 	uint8_t mapCount;
+	static TwoWire &myWire;
 };
 
 #endif
